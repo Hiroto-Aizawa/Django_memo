@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Memo
 from django.shortcuts import get_object_or_404
+from . forms import MemoForm
 
 # Create your views here.
 def index(request):
@@ -13,4 +14,13 @@ def detail(request, memo_id):
 
 
 def new_memo(request):
-    return render(request, 'app/new_memo.html')
+    # POSTメソッドの場合は保存処理が行われる
+    if request.method == 'POST':
+        form = MemoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # 保存後はindexページにリダイレクト
+            return redirect('app:index')
+    else:
+        form = MemoForm()
+    return render(request, 'app/new_memo.html', {'form': form})
