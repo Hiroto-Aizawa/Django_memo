@@ -1,3 +1,5 @@
+{% extends 'app/base.html' %} {% block content %}
+
 <a class="btn" href="{% url 'app:new_memo' %}">新規メモ作成</a>
 
 {% for memo in memos %}
@@ -7,4 +9,4 @@
         <span class="updated_datetime">{{ memo.updated_datetime }}</span>
     </div>
 </a>
-{% endfor %}
+{% endfor %} {% endblock %}

@@ -1,10 +1,15 @@
+{% extends 'app/base.html' %} {% block content %}
+
 <div>
     <a href="{% url 'app:index' %}">ホームに戻る</a>
 </div>
 
 <!-- csrf_token セキュリティ対策用のタグ -->
-<form action="{% url 'app:new_memo' %}" method="POST">{% csrf_token %}
+<form action="{% url 'app:new_memo' %}" method="POST">
+    {% csrf_token %}
     <!-- as_p でpタグで囲われるようになる -->
     {{ form.as_p }}
     <button type="submit" class="button">保存</button>
 </form>
+
+{% endblock %}
